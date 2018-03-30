@@ -1,4 +1,13 @@
 /* COMPILE IT WITH RUBY --- TYPE IN THE CONSOLE: sass --watch src/css/main.scss:src/css/main.css */
+body {
+  font-family: 'Acme', sans-serif; }
+
+P {
+  margin: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0; }
+
 main {
   margin-top: 50px;
   font-size: 20px; }
@@ -21,9 +30,9 @@ footer {
     width: 350px;
     height: 350px;
     border-radius: 50%;
-    background: white url("../../images/clock-no-hands.png") no-repeat center;
-    background-size: 99%;
-    padding: 13% 15%; }
+    background: white url("../../images/clock-no-hands3.png") no-repeat center;
+    background-size: 100%;
+    padding: 6% 7.5%; }
     .pomodoro-body .outer .inner::after {
       content: "";
       width: 15px;
@@ -35,14 +44,44 @@ footer {
       left: 50%;
       transform: translate(-50%, -50%); }
 
+.setup {
+  padding: 10% 5%;
+  border: 1px solid red;
+  background-color: #FFEEEE; }
+  .setup h4 {
+    padding-bottom: 10px; }
+  .setup p {
+    padding-top: 5px;
+    padding-bottom: 5px; }
+  .setup button {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px; }
+
+.timeLeft {
+  font-size: 25px;
+  padding: 10% 5%;
+  border: 1px solid red;
+  background-color: #FFEEEE; }
+
+.signatureLuka {
+  font-size: 20px; }
+
+@media (max-width: 400px) {
+  .pomodoro-body .outer {
+    width: 290px;
+    height: 290px; }
+    .pomodoro-body .outer .inner {
+      width: 87.5%;
+      height: 87.5%; } }
 .seconds {
   width: 2%;
   height: 50%;
   background: black;
   position: absolute;
-  top: 10%;
+  top: 15%;
   left: 49%;
-  transform: rotate(45deg);
-  transform-origin: 50% 80%; }
+  transform: rotate(300deg);
+  transform-origin: 50% 70%; }
 
 /*# sourceMappingURL=main.css.map */
