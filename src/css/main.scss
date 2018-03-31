@@ -30,21 +30,24 @@ footer {
 .pomodoro-body {
     display: flex;
     align-items: center;
-    padding-top: 3%;
+    padding-top: 3.5%;
+    padding-right: 2.5%; // no padding-right to set it symmetric
     width: 470px;
     height: 470px;
     background-color: #e60000;
+    background: linear-gradient(200deg, #900, #e60000); // 180deg to set it symmetric
+    box-shadow: 7px 10px 5px 1px gray; /* , 10px 12px 7px 2px black; */ // no box-shadow for symmetry
     border-radius: 50%;
     .outer {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 420px; 
+        width: 420px;
         height: 420px;
         border-radius: 50%;
-        border: 1px solid white;
+        border: 5px solid #e60000; // Should choose a border color that transforms slowly to redish #e60000 (border-image gradient...)
         background-color: red; // in case browser cant handle gradients
-        background: radial-gradient(red 61%, white 64%, red 68%); // not sure how gradients work and if it can be better
+        background: radial-gradient(red 61%, white 63%, red 68%); // not sure how gradients work and if it can be better
         margin-left: auto;
         margin-right: auto;
         .inner {
