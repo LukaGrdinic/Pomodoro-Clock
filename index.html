@@ -21,8 +21,14 @@
     <div class="container text-center mt-5">
         <header>
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 d-flex justify-content-center">
+                    <button id="playAndStop" onclick="toggleTimer()">
+                        <i class="fas fa-play"></i>
+                    </button>
                     <h1>Pomodoro Clock</h1>
+                    <button id="reset" onclick="resetTimer()">
+                        <i class="fas fa-undo-alt"></i>
+                    </button>
                 </div>
             </div>
         </header>
@@ -42,30 +48,30 @@
                         <div class="row align-items-center">
                             <div class="col-6">
                                 <div>
-                                    <button class="btn btn-danger">
+                                    <button id="increaseWorkingTime" class="btn btn-danger">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
-                                <div id="workingTime">
-                                    <p>25</p>
+                                <div>
+                                    <p id="setWorkingTime">25</p>
                                 </div>
                                 <div>
-                                    <button class="btn btn-danger">
+                                    <button id="decreaseWorkingTime" class="btn btn-danger">
                                         <i class="fas fa-minus"></i>
                                     </button>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div>
-                                    <button class="btn btn-danger">
+                                    <button id="increaseBreakTime" class="btn btn-danger">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
-                                <div id="breakTime">
-                                    <p>5</p>
+                                <div>
+                                    <p id="setBreakTime">5</p>
                                 </div>
                                 <div>
-                                    <button class="btn btn-danger">
+                                    <button id="decreaseBreakTime" class="btn btn-danger">
                                         <i class="fas fa-minus"></i>
                                     </button>
                                 </div>
