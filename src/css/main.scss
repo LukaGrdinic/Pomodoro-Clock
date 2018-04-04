@@ -16,13 +16,14 @@ h1,h2,h3,h4,h5,h6 {
 
 // LAYOUT
 
-main {
+header,footer {
     margin-top: 50px;
-    font-size:20px;
 }
 
-footer {
+main {
     margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 20px;
 }
 
 // CUSTOM CLASSES
@@ -30,13 +31,13 @@ footer {
 .pomodoro-body {
     display: flex;
     align-items: center;
-    padding-top: 3.5%;
-    padding-right: 2.5%; // no padding-right to set it symmetric
+    padding-top: 2.5%;
+    padding-right: 2.5%;
     width: 470px;
     height: 470px;
     background-color: #e60000;
-    background: linear-gradient(200deg, #900, #e60000); // 180deg to set it symmetric
-    box-shadow: 7px 10px 5px 1px gray; /* , 10px 12px 7px 2px black; */ // no box-shadow for symmetry
+    background: linear-gradient(240deg, #900, #e60000);
+    box-shadow: 7px 10px 10px 1px gray;
     border-radius: 50%;
     .outer {
         display: flex;
@@ -45,9 +46,9 @@ footer {
         width: 420px;
         height: 420px;
         border-radius: 50%;
-        border: 5px solid #e60000; // Should choose a border color that transforms slowly to redish #e60000 (border-image gradient...)
+        border: 5px solid #e60000;
         background-color: red; // in case browser cant handle gradients
-        background: radial-gradient(red 61%, white 63%, red 68%); // not sure how gradients work and if it can be better
+        background: radial-gradient(red 61%, white 63%, red 68%);
         margin-left: auto;
         margin-right: auto;
         .inner {
@@ -73,10 +74,14 @@ footer {
     }
 }
 
-.setup {
-    padding: 10% 5%;
+.pomodoro-box { // Maybe some adjustments here (consult Anja)
+    font-size:25px;
+    padding: 20px 10px;
     border: 1px solid red;
     background-color: #FFEEEE;
+}
+
+.pomodoro-setup {
     h4 {
         padding-bottom: 10px;
     }
@@ -88,42 +93,42 @@ footer {
         border-radius: 50%;
         width: 50px;
         height: 50px;
-    }
-}
-
-.timeLeft {
-    font-size:25px;
-    padding: 10% 5%;
-    border: 1px solid red;
-    background-color: #FFEEEE;
-}
-
-.signatureLuka { // Mislim da ovo nije dobro rjesenje, samo treba da se odradi neki <p> tag ili <h4> tag tom elementu dje je potpis
-    font-size: 20px;
-}
-
-// SMALL SCREEN ADJUSTMENTS
-
-@media (max-width: 400px) {
-    .pomodoro-body .outer {
-        width: 290px;
-        height: 290px;
-        .inner {
-            width: 87.5%;
-            height: 87.5%;
-        }
+        box-shadow: none !important;
     }
 }
 
 // THE SECONDS HAND
 
-.seconds {
+.seconds { // Needs small adjustments, a little bit to the right, but why?
     width: 2%;
     height: 50%;
     background: black;
     position: absolute;
     top: 15%;
     left: 49%;
-    transform: rotate(300deg);
     transform-origin: 50% 70%;
 }
+
+// SMALL SCREEN ADJUSTMENTS --- PROBLEMS OCCURED DUE TO PROPORTION INCONSISTENCY ON DIFFERENT SCREEN SIZES!!!
+
+@media (max-width: 520px) { // The box shadow keeps the same height, should maybe be proportional to the clock size
+    .pomodoro-body {
+        width: 290px;
+        height:  290px;
+        .outer {
+            width: 95%;
+            height: 95%;
+            .inner {
+                width:  87.5%;
+                height:  87.5%;
+            }
+        }
+    }
+    .seconds {
+        height: 40% !important;
+        top: 20% !important;
+        transform-origin: 50% 75% !important;
+    }
+}
+
+// NEED TO ADJUST TOGGLE TIMER AND RESET TIMER BUTTONS
