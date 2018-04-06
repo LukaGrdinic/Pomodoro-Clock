@@ -32,24 +32,9 @@ $('#decreaseBreakTime').on('click', function () {
 	}
 });
 
-let workingTimeValue = parseInt($('#setWorkingTime').text());
-let breakTimeValue = parseInt($('#setBreakTime').text());
+// Toggle Timer
 
-let clock = {
-	timerStarted: false,
-	workingTimeSet: workingTimeValue, // This is the value of the #setWorkingTime Element
-	breakTimeSet: breakTimeValue, // This is the value of the #setBreakTime Element
-	timer: {
-		minutes: 25,
-		seconds: 0,
-		breakMinutes: 5,
-		breakSeconds: 0
-	}
-}
-
-let interval;
-
-function toggleTimer() {
+$('#playAndStop').on('click', function() {
 	if (clock.timerStarted) {
 		clearInterval(interval);
 		clock.timerStarted = false;
@@ -59,44 +44,77 @@ function toggleTimer() {
 		clock.timerStarted = true;
 		$('#playAndStop').html('<i class="fas fa-pause"></i>');
 	}
-}
+});
 
-function resetTimer() {
+// Reset Timer
+
+$('#resetTimer').on('click', function() {
 	clearInterval(interval);
 	clock.timerStarted = false;
 	resetWorkAndBreakTime();
 	$('#playAndStop').html('<i class="fas fa-play"></i>');
+});
+
+// Main functions and variables
+
+let interval;
+let alarmSound = new Audio();
+alarmSound.src = 'sounds/MP3/Alert/Alert-09.mp3';
+
+let clock = {
+	timerStarted: false,
+	workingTimeSet: parseInt($('#setWorkingTime').text()), // Value of the #setWorkingTime Element
+	breakTimeSet: parseInt($('#setBreakTime').text()), // Value of the #setBreakTime Element
+	timer: {
+		minutes: 25,
+		seconds: 0,
+		breakMinutes: 5,
+		breakSeconds: 0
+	}
 }
 
 function countdown() {
-	if (clock.timer.minutes === 0 && clock.timer.seconds === 0) { // Start the breakTime countdown 
-		if (clock.timer.breakMinutes === 0 && clock.timer.breakSeconds === 1) { // when breakTime ends,adding one second because the next interval invokes countdown after 1 second
-			// Sound Signalization when break ends
+	if (clock.timer.minutes === 0 && clock.timer.seconds === 0) { // Start the breakTime countdown
+		if (clock.timer.breakMinutes === 0 && clock.timer.breakSeconds === 1) { // when breakTime ends
+			alarmSound.play(); // Sound Signalization when break ends
 			resetWorkAndBreakTime(); // Reset the workingTime and breakTime before starting the workingTime countdown
-		} else { // while breakTime is running
-			// Sound Signalization when break starts
+		} else { // while breakTime is running	
 			if (clock.timer.breakMinutes === clock.breakTimeSet && clock.timer.breakSeconds === 0) {
 				$('#timeLeftText').text('Break Time!');
+				alarmSound.play(); 	// Sound Signalization when break starts
 			}
 			if (clock.timer.breakSeconds === 0) {
 				clock.timer.breakMinutes--;
 				clock.timer.breakSeconds = 60;
-				$('#timeLeft').text(clock.timer.breakMinutes);
+				// Using Animate.css to make the numbers fade in and out
+				$('#timeLeft').addClass('fadeOutUp').on('animationend webkitAnimationEnd', function () {
+					$(this).removeClass('fadeOutUp');
+					$('#timeLeft').text(clock.timer.breakMinutes);
+					$('#timeLeft').addClass('fadeInUp').on('animationend webkitAnimationEnd', function () {
+						$(this).removeClass('fadeInUp');
+					});
+				});
+				// end Animate.css
 			}
 			clock.timer.breakSeconds--;
-			console.log(clock.timer); // This is the movement of the hand on the clock
-			moveHand();
+			moveHand(); // This is the movement of the hand on the clock
 		}
 	} else { // Start the workingTime countdown
-
 		if (clock.timer.seconds === 0) {
 			clock.timer.minutes--;
 			clock.timer.seconds = 60;
-			$('#timeLeft').text(clock.timer.minutes);
+			// Using Animate.css to make the numbers fade in and out
+			$('#timeLeft').addClass('fadeOutUp').on('animationend webkitAnimationEnd', function () {
+				$(this).removeClass('fadeOutUp');
+				$('#timeLeft').text(clock.timer.minutes);
+				$('#timeLeft').addClass('fadeInUp').on('animationend webkitAnimationEnd', function () {
+					$(this).removeClass('fadeInUp');
+				});
+			});
+			// end Animate.css
 		}
 		clock.timer.seconds--;
-		console.log(clock.timer); // This is the movement of the hand on the clock
-		moveHand();
+		moveHand(); // This is the movement of the hand on the clock
 	}
 }
 
@@ -114,7 +132,7 @@ function resetWorkAndBreakTime() { // I should set other things in this function
 
 function moveHand() {
 	var observedSeconds;
-	if (clock.timer.minutes === 0 && clock.timer.seconds === 0) { 	// If breakTime is running
+	if (clock.timer.minutes === 0 && clock.timer.seconds === 0) { // If breakTime is running
 		observedSeconds = clock.timer.breakSeconds;
 	} else { // If workingTime is running
 		observedSeconds = clock.timer.seconds;
@@ -123,12 +141,7 @@ function moveHand() {
 	$('.seconds').css('transform', `rotate(${secondsTodegres}deg)`); // using template literals - backticks ``
 }
 
-// MAKE SURE THERE ARE SOUND EFFECTS
-// ADD SOME ANIMATIONS TO #TIMELEFT ELEMENT (MAYBE TO #SETWORKINGTIME AND #SETBREAKTIME ALSO)
 // DO SOME REFACTORING (USE CLOSURE TRICKS IF POSSIBLE) - MAYBE DIVIDE FUNCTIONS IN OBJECTS, LIKE WITH JAVASCRIPT CALCULATOR
-// MAKE SURE THE MOVEMENT OF THE HAND IS A BIT SMOOTHER, IF POSSIBLE TO FIX WITH JAVASCRIPT
-// ADD SOME KEYCODE EVENTS, BY PRESSING ENTER, TOGGLE THE TOGGLETIMER FUNCTION
-// ADD A FEATURE - WHEN 10S BEFORE BREAK, SET SOME VISUAL AND/OR SOUND SIGNALIZATION
 
-// VALJALO BI DA NA KRAJU SVE UBACIM U JEDNU $document.ready funkciju
-// SREDITI STVARI SA JQUERRY-jem, AKO KORISTIM JQUERRY, DRZIM SE JQUERRYJA, NPR NEMA STAVLJANJA ONIH ONCLICKOVA U HTML-U
+// MAKE SURE THE MOVEMENT OF THE HAND IS A BIT SMOOTHER, IF POSSIBLE TO FIX WITH JAVASCRIPT
+// ADD A FEATURE - WHEN 10S BEFORE BREAK, SET SOME VISUAL AND/OR SOUND SIGNALIZATION

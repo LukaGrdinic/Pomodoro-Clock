@@ -89,11 +89,10 @@ main {
         padding-top: 5px;
         padding-bottom: 5px;
     }
-    button { // Mozda treba odje regulisat komplet dugme, a ne preko btn btn-danger klasa bootstrapovih
+    button {
         border-radius: 50%;
         width: 50px;
         height: 50px;
-        box-shadow: none !important;
     }
 }
 
@@ -101,12 +100,41 @@ main {
 
 .seconds { // Needs small adjustments, a little bit to the right, but why?
     width: 2%;
-    height: 50%;
+    height: 35%;
     background: black;
     position: absolute;
-    top: 15%;
+    top: 30%;
     left: 49%;
-    transform-origin: 50% 70%;
+    transform-origin: 50% 57.1428571429%; // the percentage is calculated
+    
+    &::before { // making the hand have a sharp edge
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        transform: translate(0, -100%);
+        content: "";
+        box-sizing: content-box;
+        width: 3px;
+        border-top: 0px;
+        border-left: 2px solid transparent;
+        border-right: 2px solid transparent;
+        border-bottom: 50px solid black;
+    }
+    &::after { // giving the hand a stylish tail
+        position: absolute;
+        top: 100%;
+        left:50%;
+        transform: translate(-50%, 0%);
+        content: "";
+        box-sizing: content-box;
+        width:100%;
+        border-top: 0px;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 20px solid black;
+        border-bottom-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+    }
 }
 
 // SMALL SCREEN ADJUSTMENTS --- PROBLEMS OCCURED DUE TO PROPORTION INCONSISTENCY ON DIFFERENT SCREEN SIZES!!!
@@ -125,10 +153,28 @@ main {
         }
     }
     .seconds {
-        height: 40% !important;
-        top: 20% !important;
-        transform-origin: 50% 75% !important;
+        height: 30% !important;
+        width: 4px !important;
+        top: 30% !important;
+        transform-origin: 50% 66.6666666667% !important; // percentage should be maybe done with calc()
+        &::before {
+            width: 1px;
+            border-left: 1.5px solid transparent;
+            border-right: 1.5px solid transparent;
+            border-bottom-width: 25px;
+        }
     }
 }
 
-// NEED TO ADJUST TOGGLE TIMER AND RESET TIMER BUTTONS
+// CHANGES MADE TO BOOTSTRAP CLASSES
+
+.btn {
+    box-shadow: none !important;
+}
+
+// CHANGES MADE TO ANIMATE.CSS
+
+.animated {
+    -webkit-animation-duration: 0.2s;
+    animation-duration: 0.2s;
+}

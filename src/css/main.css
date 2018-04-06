@@ -72,17 +72,42 @@ main {
 .pomodoro-setup button {
   border-radius: 50%;
   width: 50px;
-  height: 50px;
-  box-shadow: none !important; }
+  height: 50px; }
 
 .seconds {
   width: 2%;
-  height: 50%;
+  height: 35%;
   background: black;
   position: absolute;
-  top: 15%;
+  top: 30%;
   left: 49%;
-  transform-origin: 50% 70%; }
+  transform-origin: 50% 57.1428571429%; }
+  .seconds::before {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    transform: translate(0, -100%);
+    content: "";
+    box-sizing: content-box;
+    width: 3px;
+    border-top: 0px;
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
+    border-bottom: 50px solid black; }
+  .seconds::after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    content: "";
+    box-sizing: content-box;
+    width: 100%;
+    border-top: 0px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid black;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%; }
 
 @media (max-width: 520px) {
   .pomodoro-body {
@@ -96,8 +121,20 @@ main {
         height: 87.5%; }
 
   .seconds {
-    height: 40% !important;
-    top: 20% !important;
-    transform-origin: 50% 75% !important; } }
+    height: 30% !important;
+    width: 4px !important;
+    top: 30% !important;
+    transform-origin: 50% 66.6666666667% !important; }
+    .seconds::before {
+      width: 1px;
+      border-left: 1.5px solid transparent;
+      border-right: 1.5px solid transparent;
+      border-bottom-width: 25px; } }
+.btn {
+  box-shadow: none !important; }
+
+.animated {
+  -webkit-animation-duration: 0.2s;
+  animation-duration: 0.2s; }
 
 /*# sourceMappingURL=main.css.map */
