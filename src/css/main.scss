@@ -16,53 +16,72 @@ h1,h2,h3,h4,h5,h6 {
 
 // LAYOUT
 
-main {
+header,footer {
     margin-top: 50px;
-    font-size:20px;
 }
 
-footer {
+main {
     margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 20px;
 }
 
 // CUSTOM CLASSES
 
-.pomodoro-body .outer {
+.pomodoro-body {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 400px;
-    height: 400px;
+    padding-top: 2.5%;
+    padding-right: 2.5%;
+    width: 470px;
+    height: 470px;
+    background-color: #e60000;
+    background: linear-gradient(240deg, #900, #e60000);
+    box-shadow: 7px 10px 10px 1px gray;
     border-radius: 50%;
-    background-color: red;
-    margin-left: auto;
-    margin-right: auto;
-    .inner {
-        position: relative;
-        width: 350px;
-        height: 350px;
+    .outer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 420px;
+        height: 420px;
         border-radius: 50%;
-        background: white url("../../images/clock-no-hands3.png") no-repeat center; // Mozda bi bilo dobro da je bas .svg fajl u pozadini
-        background-size: 100%;
-        padding: 6% 7.5%;
-        &::after { // The dot in the middle of the clock
-            content: "";
-            width: 15px;
-            height: 15px;
+        border: 5px solid #e60000;
+        background-color: red; // in case browser cant handle gradients
+        background: radial-gradient(red 61%, white 63%, red 68%);
+        margin-left: auto;
+        margin-right: auto;
+        .inner {
+            position: relative;
+            width: 350px;
+            height: 350px;
             border-radius: 50%;
-            background-color: black;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            background: white url("../../images/clock-no-hands3.png") no-repeat center; // Mozda bi bilo dobro da je bas .svg fajl u pozadini
+            background-size: 100%;
+            padding: 6% 7.5%;
+            &::after { // The dot in the middle of the clock
+                content: "";
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                background-color: black;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
         }
     }
 }
 
-.setup {
-    padding: 10% 5%;
+.pomodoro-box { // Maybe some adjustments here (consult Anja)
+    font-size:25px;
+    padding: 20px 10px;
     border: 1px solid red;
     background-color: #FFEEEE;
+}
+
+.pomodoro-setup {
     h4 {
         padding-bottom: 10px;
     }
@@ -70,46 +89,92 @@ footer {
         padding-top: 5px;
         padding-bottom: 5px;
     }
-    button { // Mozda treba odje regulisat komplet dugme, a ne preko btn btn-danger klasa bootstrapovih
+    button {
         border-radius: 50%;
         width: 50px;
         height: 50px;
     }
 }
 
-.timeLeft {
-    font-size:25px;
-    padding: 10% 5%;
-    border: 1px solid red;
-    background-color: #FFEEEE;
+// THE SECONDS HAND
+
+.seconds { // Needs small adjustments, a little bit to the right, but why?
+    width: 2%;
+    height: 35%;
+    background: black;
+    position: absolute;
+    top: 30%;
+    left: 49%;
+    transform-origin: 50% 57.1428571429%; // the percentage is calculated
+    
+    &::before { // making the hand have a sharp edge
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        transform: translate(0, -100%);
+        content: "";
+        box-sizing: content-box;
+        width: 3px;
+        border-top: 0px;
+        border-left: 2px solid transparent;
+        border-right: 2px solid transparent;
+        border-bottom: 50px solid black;
+    }
+    &::after { // giving the hand a stylish tail
+        position: absolute;
+        top: 100%;
+        left:50%;
+        transform: translate(-50%, 0%);
+        content: "";
+        box-sizing: content-box;
+        width:100%;
+        border-top: 0px;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 20px solid black;
+        border-bottom-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+    }
 }
 
-.signatureLuka { // Mislim da ovo nije dobro rjesenje, samo treba da se odradi neki <p> tag ili <h4> tag tom elementu dje je potpis
-    font-size: 20px;
-}
+// SMALL SCREEN ADJUSTMENTS --- PROBLEMS OCCURED DUE TO PROPORTION INCONSISTENCY ON DIFFERENT SCREEN SIZES!!!
 
-// SMALL SCREEN ADJUSTMENTS
-
-@media (max-width: 400px) {
-    .pomodoro-body .outer {
+@media (max-width: 520px) { // The box shadow keeps the same height, should maybe be proportional to the clock size
+    .pomodoro-body {
         width: 290px;
-        height: 290px;
-        .inner {
-            width: 87.5%;
-            height: 87.5%;
+        height:  290px;
+        .outer {
+            width: 95%;
+            height: 95%;
+            .inner {
+                width:  87.5%;
+                height:  87.5%;
+            }
+        }
+    }
+    .seconds {
+        height: 30% !important;
+        width: 4px !important;
+        top: 30% !important;
+        transform-origin: 50% 66.6666666667% !important; // percentage should be maybe done with calc()
+        &::before {
+            width: 1px;
+            border-left: 1.5px solid transparent;
+            border-right: 1.5px solid transparent;
+            border-bottom-width: 25px;
         }
     }
 }
 
-// THE SECONDS HAND
+// CHANGES MADE TO BOOTSTRAP CLASSES
 
-.seconds {
-    width: 2%;
-    height: 50%;
-    background: black;
-    position: absolute;
-    top: 15%;
-    left: 49%;
-    transform: rotate(300deg);
-    transform-origin: 50% 70%;
+.btn {
+    box-shadow: none !important;
+}
+
+// CHANGES MADE TO ANIMATE.CSS
+
+.animated {
+    -webkit-animation-duration: 0.2s;
+    animation-duration: 0.2s;
 }
