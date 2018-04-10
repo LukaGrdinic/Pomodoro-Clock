@@ -55,7 +55,7 @@ $('#resetTimer').on('click', function() {
 	$('#playAndStop').html('<i class="fas fa-play"></i>');
 });
 
-// Main functions and variables
+/* MAIN FUNCTIONS AND VARIABLES */
 
 let interval;
 let alarmSound = new Audio();
@@ -141,7 +141,17 @@ function moveHand() {
 	$('.seconds').css('transform', `rotate(${secondsTodegres}deg)`); // using template literals - backticks ``
 }
 
+/* ROUTER SETUP */
+
+var router = new Router().init();
+
+router.on('/reset', function () {
+	resetWorkAndBreakTime();
+	console.log('It is reset!');
+});
+
 // DO SOME REFACTORING (USE CLOSURE TRICKS IF POSSIBLE) - MAYBE DIVIDE FUNCTIONS IN OBJECTS, LIKE WITH JAVASCRIPT CALCULATOR
+// ADD DIRECTOR.JS FUNCTIONALITY : WHEN URL IS #RESET , THEN RESET THE TIMER
 
 // MAKE SURE THE MOVEMENT OF THE HAND IS A BIT SMOOTHER, IF POSSIBLE TO FIX WITH JAVASCRIPT
 // ADD A FEATURE - WHEN 10S BEFORE BREAK, SET SOME VISUAL AND/OR SOUND SIGNALIZATION

@@ -1,9 +1,16 @@
 /* COMPILE IT WITH RUBY --- TYPE IN THE CONSOLE: sass --watch src/css/main.scss:src/css/main.css */
 
+// COLORS
+
+$red-dark: #900;
+$red-bloody: #e60000;
+$pink-pale: #FFEEEE;
+
 // BASE
 
 body {
     font-family: 'Acme', sans-serif;
+    background-color:$pink-pale;
 }
 
 P {
@@ -35,8 +42,8 @@ main {
     padding-right: 2.5%;
     width: 470px;
     height: 470px;
-    background-color: #e60000;
-    background: linear-gradient(240deg, #900, #e60000);
+    background-color: $red-bloody;
+    background: linear-gradient(240deg, $red-dark, $red-bloody);
     box-shadow: 7px 10px 10px 1px gray;
     border-radius: 50%;
     .outer {
@@ -46,7 +53,7 @@ main {
         width: 420px;
         height: 420px;
         border-radius: 50%;
-        border: 5px solid #e60000;
+        border: 5px solid $red-bloody;
         background-color: red; // in case browser cant handle gradients
         background: radial-gradient(red 61%, white 63%, red 68%);
         margin-left: auto;
@@ -74,11 +81,11 @@ main {
     }
 }
 
-.pomodoro-box { // Maybe some adjustments here (consult Anja)
+.pomodoro-box { // Maybe background-color is not needed here
     font-size:25px;
     padding: 20px 10px;
-    border: 1px solid red;
-    background-color: #FFEEEE;
+    border: 1px solid $red-bloody;
+/*     background-color: $pink-pale; */
 }
 
 .pomodoro-setup {
@@ -170,6 +177,7 @@ main {
 
 .btn {
     box-shadow: none !important;
+    background-color:$red-bloody !important;
 }
 
 // CHANGES MADE TO ANIMATE.CSS
